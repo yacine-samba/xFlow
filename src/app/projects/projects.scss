@@ -1,0 +1,39 @@
+/* Bouton d'edition */
+.editButton {
+  padding: 10px 20px;
+  background-color: #0f8bf1;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.editButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.editButton:hover {
+  opacity: 0.8;
+}
+
+/* Bouton de suppression */
+  .deleteButton {
+    padding: 10px 20px;
+    background-color: #e71a1a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  
+  .deleteButton:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .deleteButton:hover {
+    opacity: 0.8;
+  }
