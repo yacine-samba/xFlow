@@ -25,7 +25,7 @@ Avant de commencer, vous devez avoir installé les outils suivants sur votre mac
 Clonez ce dépôt sur votre machine locale en utilisant la commande suivante :
 
 ```bash
-git clone https://github.com/yourusername/votre-depot.git
+git clone https://github.com/yacine-samba/xFlow
 ```
 
 ### 2. Installer les dépendances
