@@ -123,7 +123,7 @@ const Navbar = () => {
               <>
 
                 <div className="navbar__search">
-                  <input type="text" placeholder="Rechercher..." />
+                  <input type="text" placeholder="Rechercher..." className="navbar__search__input" />
                   <Search className="navbar__search-icon" />
                 </div>
                 <button className="navbar__button create" onClick={handleCreateProjectRedirect}>

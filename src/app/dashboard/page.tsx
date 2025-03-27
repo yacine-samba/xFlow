@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import Parse from '../../../lib/parse';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar/Navbar';
 import { useRouter } from 'next/navigation';
 import './dashboard.scss';
 
@@ -16,12 +15,21 @@ const Dashboard = () => {
       if (!currentUser) {
         router.push('/auth/login');
       } else {
+
         const fetchProjects = async () => {
-          const query = new Parse.Query('Project');
-          query.equalTo('owner', currentUser);
+          const ownedProjectsQuery = new Parse.Query("Project").equalTo("owner", currentUser);
+
+          // Récupérer les projets où l'utilisateur est dans teamMembers
+          const memberProjectsQuery = new Parse.Query("Project").matchesQuery(
+            "teamMembers",
+            new Parse.Query("_User").equalTo("objectId", currentUser.id)
+          );
+
+          const query = Parse.Query.or(ownedProjectsQuery, memberProjectsQuery);
           const results = await query.find();
           setProjects(results);
         };
+
 
         fetchProjects();
       }

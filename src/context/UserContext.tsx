@@ -1,45 +1,36 @@
 'use client'
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import Parse from '../../lib/parse';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import Parse from '../../lib/parse';  // Assurez-vous d'importer correctement Parse
 
-interface UserContextType {
-  user: Parse.User | null;
-  setUser: React.Dispatch<React.SetStateAction<Parse.User | null>>;
-}
+// Création du contexte
+const UserContext = createContext(null);
 
-const UserContext = createContext<UserContextType | undefined>(undefined);
-
-export const useUser = () => {
-  const context = useContext(UserContext);
-  if (!context) {
-    throw new Error('useUser must be used within a UserProvider');
-  }
-  return context;
-};
-
-export const UserProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<Parse.User | null>(null);
+// Composant Provider qui sera utilisé pour fournir l'utilisateur
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const checkUserSession = async () => {
+    async function checkUserSession() {
       try {
         const currentUser = await Parse.User.currentAsync();
-        if (currentUser) {
-          setUser(currentUser);
-        } else {
-          setUser(null);
-        }
-      } catch (err) {
-        console.error('Erreur lors de la vérification de la session:', err);
-        setUser(null);
+        setUser(currentUser);  // Met à jour l'état de l'utilisateur
+      } catch (error) {
+        console.error('Erreur de session:', error);
+      } finally {
+        setIsLoading(false);
       }
-    };
-    checkUserSession();
+    }
+
+    checkUserSession();  // Vérifie la session de l'utilisateur à chaque montée du composant
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, isLoading }}>
       {children}
     </UserContext.Provider>
   );
 };
+
+// Hook personnalisé pour accéder à l'utilisateur
+export const useUser = () => useContext(UserContext);

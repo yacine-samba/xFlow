@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import Parse from '../../../../lib/parse'; 
+import Parse from '../../../../lib/parse';
 import { useRouter } from 'next/navigation';
 
 import '../auth.scss';
@@ -70,7 +70,7 @@ const Register = () => {
         </div>
         <button type="submit" className="submit-button">S'inscrire</button>
       </form>
-      <p>
+      <p className='link'>
         Vous avez déja un compte ? <Link href="/auth/login">Connectez-vous</Link>
       </p>
     </div>

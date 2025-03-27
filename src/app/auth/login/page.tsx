@@ -98,7 +98,7 @@ export default function LoginPage() {
           Se connecter
         </button>
       </form>
-      <p>
+      <p className='link'>
         Vous n'avez pas de compte ? <Link href="/auth/register">Inscrivez-vous</Link>
       </p>
     </div>

@@ -19,21 +19,31 @@
 }
 
 /* Bouton de suppression */
-  .deleteButton {
-    padding: 10px 20px;
-    background-color: #e71a1a;
+.deleteButton {
+  padding: 10px 20px;
+  background-color: #e71a1a;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+
+  &__icon {
+    margin-right: 5px;
     color: white;
-    border: none;
+    border: 1px solid #ccc;
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
+    padding: 4px 8px;
   }
-  
-  .deleteButton:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-  }
-  
-  .deleteButton:hover {
-    opacity: 0.8;
-  }
+}
+
+.deleteButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.deleteButton:hover {
+  opacity: 0.8;
+}

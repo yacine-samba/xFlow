@@ -18,70 +18,99 @@ form {
   border-radius: 8px;
   width: 100%;
   max-width: 400px;
-}
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
 
-label {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-input {
-  color: #c2c2c2;
-  padding: 0.8rem;
-  font-size: 1rem;
-  border: 1px solid #c2c2c2;
-  border-radius: 8px;
-  outline: none;
-  transition: border 0.3s ease;
-  background-color: transparent;
-}
-
-input:focus {
-  border-color: #318c40;
-}
-
-
-.error {
-  color: red;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-}
-
-.success {
-  color: green;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-}
-
-.submit-button {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.1rem;
-  border-radius: 9999px;
-  background-color: #1d5d28;
-  color: white;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-  background-color: #20762f;
-}
-
-@media (max-width: 600px) {
-  .auth-container {
-    padding: 10px;
+    label {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
   }
 
-  form {
-    padding: 1.5rem;
+  input {
+    color: var(--foreground);
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid #4b4b4b;
+    border-radius: 8px;
+    outline: none;
+    transition: border 0.3s ease;
+    background-color: var(--background-container);
+
+    &:focus {
+      border-color: #318c40;
+    }
+  }
+
+  .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .success {
+    color: green;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .submit-button {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 9999px;
+    background-color: #1d5d28;
+    color: var(--foreground);
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #20762f;
+    }
+  }
+}
+
+.link {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+
+  a {
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--primary-light);
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-light);
+      transition: width 0.2s;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+
+    &.active {
+      color: var(--primary);
+
+      &::after {
+        width: 100%;
+      }
+    }
   }
 }
