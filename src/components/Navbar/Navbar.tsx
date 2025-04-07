@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Parse from '../../../lib/parse';
-import { Bell, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 import './Navbar.scss';
 
 const Navbar = () => {

@@ -30,8 +30,8 @@ const Register = () => {
         console.log('Redirection vers /auth/login');
         router.push('/auth/login');
       }, 2000);
-    } catch (err: any) {
-      setError('Erreur lors de la création de l\'utilisateur : ' + err.message);
+    } catch (err) {
+      setError('Erreur lors de la création de l&apos;utilisateur : ' + (err instanceof Error ? err.message : 'Erreur inconnue'));
     }
   };
 
@@ -42,7 +42,7 @@ const Register = () => {
       {success && <p className="success">{success}</p>}
       <form onSubmit={handleRegister}>
         <div className="form-group">
-          <label>Nom d'utilisateur :</label>
+          <label>Nom d&apos;utilisateur :</label>
           <input
             type="text"
             value={username}
@@ -68,7 +68,7 @@ const Register = () => {
             required
           />
         </div>
-        <button type="submit" className="submit-button">S'inscrire</button>
+        <button type="submit" className="submit-button">S&apos;inscrire</button>
       </form>
       <p className='link'>
         Vous avez déja un compte ? <Link href="/auth/login">Connectez-vous</Link>

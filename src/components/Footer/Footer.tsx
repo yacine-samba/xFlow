@@ -17,7 +17,7 @@ const Footer = () => {
             <ul className="footer-list">
               <li><a href="#">Fonctionnalités</a></li>
               <li><a href="#">Tarifs</a></li>
-              <li><a href="#">Guide d'utilisation</a></li>
+              <li><a href="#">Guide d&apos;utilisation</a></li>
               <li><a href="#">FAQ</a></li>
             </ul>
           </div>
@@ -45,7 +45,7 @@ const Footer = () => {
           <p className="footer-copyright">© 2025 XFlow. Tous droits réservés.</p>
           <div className="footer-links">
             <a href="#">Politique de confidentialité</a>
-            <a href="#">Conditions d'utilisation</a>
+            <a href="#">Conditions d&apos;utilisation</a>
             <a href="#">Mentions légales</a>
           </div>
         </div>

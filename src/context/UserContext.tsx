@@ -3,11 +3,16 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import Parse from '../../lib/parse';  // Assurez-vous d'importer correctement Parse
 
 // Création du contexte
-const UserContext = createContext(null);
+interface UserContextType {
+  user: Parse.User | null;
+  isLoading: boolean;
+}
+
+const UserContext = createContext<UserContextType | null>(null);
 
 // Composant Provider qui sera utilisé pour fournir l'utilisateur
-export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [user, setUser] = useState<Parse.User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

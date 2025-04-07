@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import './dashboard.scss';
 
 const Dashboard = () => {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<Parse.Object[]>([]);
   const router = useRouter();
 
   useEffect(() => {

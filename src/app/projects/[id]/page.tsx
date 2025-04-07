@@ -8,12 +8,12 @@ import "../projects.scss";
 
 export default function ProjectDetails({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
-  const [project, setProject] = useState<any>(null);
-  const [teamMembers, setTeamMembers] = useState<any[]>([]);
+  const [project, setProject] = useState<Parse.Object | null>(null);
+  const [teamMembers, setTeamMembers] = useState<Parse.Object[]>([]);
   const [loading, setLoading] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [suggestedUsers, setSuggestedUsers] = useState<any[]>([]);
+  const [suggestedUsers, setSuggestedUsers] = useState<Parse.Object[]>([]);
   const [searchError, setSearchError] = useState("");
   const projectParams = use(params);
   const projectId = projectParams.id;
@@ -69,7 +69,7 @@ export default function ProjectDetails({ params }: { params: Promise<{ id: strin
     }
   };
 
-  const handleAddMember = async (user: any) => {
+  const handleAddMember = async (user: Parse.Object) => {
     if (!user || !project) return;
 
     try {
@@ -108,7 +108,9 @@ export default function ProjectDetails({ params }: { params: Promise<{ id: strin
   const handleDelete = async () => {
     setLoading(true);
     try {
-      await project.destroy();
+      if (project) {
+        await project.destroy();
+      }
       router.push("/projects");
     } catch (error) {
       console.error("Erreur lors de la suppression du projet", error);
@@ -135,13 +137,13 @@ export default function ProjectDetails({ params }: { params: Promise<{ id: strin
               {member.get("username")}{" "}
               {project.get("owner")?.id === member.id && <strong>(Créateur)</strong>}
               {project.get("owner")?.id !== member.id && (
-                <button onClick={() => handleRemoveMember(member.id)} className="deleteButton__icon">
+                <button onClick={() => member.id && handleRemoveMember(member.id)} className="deleteButton__icon">
                   <Trash size={16} /></button>
               )}
             </li>
           ))
         ) : (
-          <p>Aucun membre dans l'équipe.</p>
+          <p>Aucun membre dans l&apos;équipe.</p>
         )}
       </ul>
 
@@ -180,7 +182,7 @@ export default function ProjectDetails({ params }: { params: Promise<{ id: strin
         isOpen={confirmDelete}
         onClose={() => setConfirmDelete(false)}
         onConfirm={handleDelete}
-        loading={loading}
+        isLoading={loading}
         title="Supprimer le projet"
         message="Es-tu sûr de vouloir supprimer ce projet ? Cette action est irréversible."
         confirmText="Oui, supprimer"

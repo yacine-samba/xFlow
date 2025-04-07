@@ -5,7 +5,7 @@ import Link from 'next/link';
 import './projects.scss';
 
 const Projects = () => {
-  const [projects, setProjects] = useState<any[]>([]);
+  const [projects, setProjects] = useState<Parse.Object[]>([]);
 
   useEffect(() => {
     const fetchProjects = async () => {

@@ -10,7 +10,6 @@ import Link from 'next/link';
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState<Parse.User | null>(null);
   const [error, setError] = useState('');
   const router = useRouter();
 
@@ -56,14 +55,16 @@ export default function LoginPage() {
 
         console.log('Utilisateur connecté:', user);
 
-        setUser(user);
-
         setTimeout(() => {
           console.log('Redirection vers Dashboard');
           router.push('/dashboard');
         }, 2000);
-      } catch (err: any) {
-        setError('Erreur de connexion : ' + err.message);
+      } catch (err) {
+        if (err instanceof Error) {
+          setError('Erreur de connexion : ' + err.message);
+        } else {
+          setError('Erreur de connexion : Une erreur inconnue est survenue');
+        }
       }
     }
   };
@@ -99,7 +100,7 @@ export default function LoginPage() {
         </button>
       </form>
       <p className='link'>
-        Vous n'avez pas de compte ? <Link href="/auth/register">Inscrivez-vous</Link>
+        Vous n&apos;avez pas de compte ? <Link href="/auth/register">Inscrivez-vous</Link>
       </p>
     </div>
   );

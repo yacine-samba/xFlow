@@ -7,14 +7,14 @@ import { useUser } from "@/context/UserContext";
 
 export default function EditProject({ params, }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
-  const [project, setProject] = useState<any>(null);
+  const [project, setProject] = useState<Parse.Object | null>(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [status, setStatus] = useState("À faire");
-  const [members, setMembers] = useState<any[]>([]); // Ajouter l'état pour les membres
+  const [members, setMembers] = useState<Parse.Object[]>([]); // Ajouter l'état pour les membres
   const [newMemberEmail, setNewMemberEmail] = useState(""); // Email ou username pour ajouter un membre
-  const [suggestedUsers, setSuggestedUsers] = useState<any[]>([]); // Liste des suggestions
+  const [suggestedUsers, setSuggestedUsers] = useState<Parse.Object[]>([]); // Liste des utilisateurs suggérés
   const [searchError, setSearchError] = useState(""); // Erreur de recherche
   const projectParams = use(params);
   const projectId = projectParams.id;
@@ -75,7 +75,7 @@ export default function EditProject({ params, }: { params: Promise<{ id: string 
     }
   };
 
-  const handleAddMember = async (user: any) => {
+  const handleAddMember = async (user: Parse.Object) => {
     if (!user) return;
 
     try {
@@ -88,6 +88,10 @@ export default function EditProject({ params, }: { params: Promise<{ id: string 
         await user.save();
       }
 
+      if (!project) {
+        console.error("Le projet est null");
+        return;
+      }
       const relation = project.relation("teamMembers");
       relation.add(user);
       await project.save();
@@ -106,6 +110,10 @@ export default function EditProject({ params, }: { params: Promise<{ id: string 
     const user = await queryUser.get(userId);
 
     if (user) {
+      if (!project) {
+        console.error("Le projet est null");
+        return;
+      }
       const relation = project.relation("teamMembers");
       relation.remove(user);
       await project.save();
@@ -152,7 +160,7 @@ export default function EditProject({ params, }: { params: Promise<{ id: string 
           required
         />
 
-        <label>Date d'échéance :</label>
+        <label>Date d&apos;échéance :</label>
         <input
           type="date"
           value={dueDate}
@@ -199,7 +207,7 @@ export default function EditProject({ params, }: { params: Promise<{ id: string 
           {members.map((member) => (
             <li key={member.id}>
               {member.get("username")}
-              <button onClick={() => handleRemoveMember(member.id)}>Supprimer</button>
+              <button onClick={() => member.id && handleRemoveMember(member.id)}>Supprimer</button>
             </li>
           ))}
         </ul>

@@ -66,7 +66,7 @@ const NewProject = () => {
           />
         </div>
         <div>
-          <label htmlFor="dueDate">Date d'échéance</label>
+          <label htmlFor="dueDate">Date d&apos;échéance</label>
           <input
             id="dueDate"
             type="date"

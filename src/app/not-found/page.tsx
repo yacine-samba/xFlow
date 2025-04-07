@@ -15,7 +15,7 @@ const Custom404 = () => {
   return (
     <div>
       <h1>Page non trouvée</h1>
-      <p>Vous allez être redirigé vers la page d'accueil...</p>
+      <p>Vous allez être redirigé vers la page d&apos;accueil...</p>
     </div>
   );
 };

@@ -12,8 +12,9 @@ const Home = () => {
     const checkUserSession = async () => {
       const currentUser = await Parse.User.currentAsync();
       if (currentUser) {
-        console.log('Utilisateur connecté:', currentUser);
+        setIsAuthenticated(true);
       } else {
+        setIsAuthenticated(false);
         console.log('Aucun utilisateur connecté.');
       }
     };
